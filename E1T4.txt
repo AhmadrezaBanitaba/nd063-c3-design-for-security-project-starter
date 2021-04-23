@@ -1,0 +1,12 @@
+
+
+#1
+The application instance allows SSH (port 22) traffic from any source from the public internet (0.0.0.0/0)
+This is clearly a poor security practice because it allows anyone to try and attempt to connect to the instance
+via SSH.
+
+#2
+One of the inbound rules also allows all ports traffic from all sources from the public internet.
+This clearly defeats the purpose of having the other inbound rules.
+Also the web service should forward requests to the web application instance which listens on port 5000 only
+from the ALB and not from all sources (0.0.0.0/0)

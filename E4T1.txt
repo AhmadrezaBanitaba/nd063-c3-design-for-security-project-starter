@@ -1,0 +1,16 @@
+
+
+# Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
+
+There are a number of things we can do to prevent an ssh brute force attack from the internet.
+ - Preventing login by root
+ - Only allow private key authentication and thus a passwordless SSH
+ - Do not listen on all interfaces.
+ - only allow specific and trusted IP addresses access to SSH
+
+
+# Neither instance should have had access to the secret recipes bucket, in the even that instance API credentials were compromised how could we have prevented access to sensitive data.
+
+"Neither instance should have had access to the secret recipes bucket", if this means the s3 buckets should not have been made public, what we could have done instead, would be to block public access to the 
+s3 buckets. Then create a role, attach a policy that allows minimal required access to the buckets, and attach that role to our ec2 instances. 
+Also, had we enabled server-side encryption, the malicious actor could not do anything useful with the data, as the data would be encrypted.

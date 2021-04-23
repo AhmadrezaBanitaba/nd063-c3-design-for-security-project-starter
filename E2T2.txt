@@ -1,0 +1,40 @@
+Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+
+Each service provides a great deal of findings so I have picked up a few from each.
+
+-SECURITY HUB
+EC2
+Ensure no security groups allow ingress from 0.0.0.0/0 to port 22
+Ensure no security groups allow ingress from 0.0.0.0/0 to port 3389	
+Application and Classic Load Balancers logging should be enabled	
+S3	
+S3 buckets should have server-side encryption enabled	
+
+
+-AMAZON INSPECTOR
+EC2
+On instance i-0692395b6a9526e5b, TCP port 20 which is associated with 'FTP' is reachable from the internet
+On instance i-0692395b6a9526e5b, TCP port 23 which is associated with 'Telnet' is reachable from the internet
+On instance i-0692395b6a9526e5b, TCP port 21 which is associated with 'FTP' is reachable from the internet
+
+
+-AWS CONFIG
+noncompliant
+securityhub-encrypted-volumes-744834fc (Checks whether the EBS volumes that are in an attached state are encrypted)
+securityhub-s3-bucket-server-side-encryption-enabled-f70fe290 (Checks that your Amazon S3 bucket either has Amazon S3 default encryption enabled or that the S3 bucket policy explicitly denies put-object requests without server side encryption.
+)
+securityhub-ec2-instance-no-public-ip-cef87701 (Checks whether Amazon Elastic Compute Cloud (Amazon EC2) instances have a public IP association.)
+
+
+
+
+
+
+
+Bonus - provide recommendations on how to remediate the vulnerabilities.
+
+Based on above findings, we can observe that the most criticial issues to be fixed and their solutions are as follows:
+
+- Block all traffic from all ports on both instances except those that are required. Also disable public IP on the instances and instead connect to the instances via other secure methods.
+- Enable EBS encryption on the instances.
+- Enable S3 server-side encryption
